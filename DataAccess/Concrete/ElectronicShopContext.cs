@@ -17,6 +17,8 @@ namespace DataAccess.Concrete
             optionsBuilder.UseSqlServer(@"Server=FAYIK; DataBase=ElectronicStores;Trusted_Connection =true");
         }
         public DbSet<Product> Products { get; set; }
+        public  DbSet<Category> Categories { get; set; }
+        public DbSet<Shop> Shops { get; set; }
 
     }
 }

@@ -8,6 +8,8 @@ namespace Business.Constants
 {
     public static class Messages
     {
-        public static string SuccessMessages = "İşlem Başarılı";
+        public static string SuccessMessages = "Process Success";
+        public static string Deleted = "Product Deleted";
+        public static string Updated = "Product Updated";
     }
 }

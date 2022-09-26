@@ -2,24 +2,23 @@
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ShopController : ControllerBase
     {
-        IProductService _productService;
-        public ProductController(IProductService productService)
+        IShopService _ıshopService;
+        public ShopController(IShopService shopService)
         {
-            _productService = productService;
+            _ıshopService = shopService;
         }
 
         [HttpPost("Add")]
-        public IActionResult Add(Product product)
+        public IActionResult Add(Shop shop)
         {
-            var result = _productService.Add(product);
+            var result = _ıshopService.Add(shop);
             if (result.Success)
             {
                 return Ok(result);
@@ -28,9 +27,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("Remove")]
-        public IActionResult Deleted(Product product)
+        public IActionResult Deleted(Shop shop)
         {
-            var result = _productService.Delete(product);
+            var result = _ıshopService.Delete(shop);
             if (result.Success)
             {
                 return Ok(result);
@@ -43,13 +42,12 @@ namespace WebAPI.Controllers
         [HttpGet("lİSTEDdB")]
         public IActionResult GetAll()
         {
-            var result = _productService.GetList();
+            var result = _ıshopService.GetList();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
     }
 }

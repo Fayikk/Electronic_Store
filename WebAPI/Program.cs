@@ -9,8 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+//For Product
 builder.Services.AddSingleton<IProductService, ProductManager>();
 builder.Services.AddSingleton<IProductDal, EfProductDal>();
+//For Category
+builder.Services.AddSingleton<ICategoryService, CategoryManager>();
+builder.Services.AddSingleton<ICategoryDal, EfCategoryDal>();
+//For Shop
+builder.Services.AddSingleton<IShopService, ShopManager>();
+builder.Services.AddSingleton<IShopDal, EfShopDal>();
+
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

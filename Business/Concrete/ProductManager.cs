@@ -28,7 +28,8 @@ namespace Business.Concrete
 
         public IResult Delete(Product product)
         {
-            throw new NotImplementedException();
+            _productDal.Delete(product);
+            return new Result(true,Messages.Deleted);
         }
 
         public IDataResult<List<Product>> GetList()
@@ -38,7 +39,8 @@ namespace Business.Concrete
 
         public IResult Update(Product product)
         {
-            throw new NotImplementedException();
+            _productDal.Update(product);
+            return new Result(true, Messages.Updated);
         }
     }
 }
