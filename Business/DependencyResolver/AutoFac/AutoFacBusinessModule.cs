@@ -4,6 +4,8 @@ using Business.Abstract;
 using Business.Concrete;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
+using Core.Utilities.Security.Jwt;
+using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
 using System;
@@ -25,8 +27,14 @@ namespace Business.DependencyInjection.AutoFac
             builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
             //For Shop
             builder.RegisterType<ShopManager>().As<IShopService>().SingleInstance();
-            builder.RegisterType<EfShopDal>().As<IProductDal>().SingleInstance();
+            builder.RegisterType<EfShopDal>().As<IShopDal>().SingleInstance();
 
+            builder.RegisterType<UserManager>().As<IUserService>();
+            builder.RegisterType<EfUserDal>().As<IUserDal>();
+
+            //For authorization (Yetkilendirme işlemleri)
+            builder.RegisterType<AuthManager>().As<IAuthService>();
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

@@ -1,5 +1,6 @@
 ﻿using Core.DataAccess.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,8 @@ namespace DataAccess.Abstract
         //Burada bize sağlanan avantaj şudur.
         //Crud operasyonları için her interface doldurulmayacaktır.
         //Class kendine özgü özellik ve metodlara yer verecektir.
+        List<ProductDetailDto> GetProductDetailDtos();
+    
+    
     }
 }

@@ -40,6 +40,18 @@ namespace WebAPI.Controllers
         }
 
 
+        [HttpGet("Detail")]
+        public IActionResult Detail()
+        {
+            var result = _productService.GetProductDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+
         [HttpGet("lİSTEDdB")]
         public IActionResult GetAll()
         {

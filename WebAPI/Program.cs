@@ -5,6 +5,10 @@ using Business.Concrete;
 using Business.DependencyInjection.AutoFac;
 using DataAccess.Abstract;
 using DataAccess.Concrete;
+using Core.Utilities.Security.JWT;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Core.Utilities.Security.Encrypto;
 
 //var builder = WebApplication.CreateBuilder(args);
 
@@ -18,16 +22,23 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 
 builder.Services.AddControllers();
 
-//For Product
-//builder.Services.AddSingleton<IProductService, ProductManager>();
-//builder.Services.AddSingleton<IProductDal, EfProductDal>();
-////For Category
-//builder.Services.AddSingleton<ICategoryService, CategoryManager>();
-//builder.Services.AddSingleton<ICategoryDal, EfCategoryDal>();
-////For Shop
-//builder.Services.AddSingleton<IShopService, ShopManager>();
-//builder.Services.AddSingleton<IShopDal, EfShopDal>();
 
+var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = tokenOptions.Issuer,
+            ValidAudience = tokenOptions.Audience,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+        };
+    });
 
 
 builder.Services.AddEndpointsApiExplorer();
