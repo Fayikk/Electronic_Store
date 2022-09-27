@@ -2,6 +2,7 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.BusinessRules;
 using Core.Utilities.Results;
@@ -26,8 +27,9 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(ProductValidator))]//Burada AOP kullanarak gerekli ilerlemeleri sağlamaktayız.
-        //İnterception teknikleri kullanılacaktır.
-        //[SecuredOperation("product.add")]
+                                                    //İnterception teknikleri kullanılacaktır.
+                                                    //[SecuredOperation("product.add")]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
             IResult result = BusinessRules.Run(CheckIfProductNameExists(product.Name));
@@ -45,7 +47,7 @@ namespace Business.Concrete
             _productDal.Delete(product);
             return new Result(true,Messages.Deleted);
         }
-
+        [CacheAspect]
         public IDataResult<List<Product>> GetList()
         {
             return new SuccessDataResult<List<Product>>(_productDal.GetAll().ToList(),Messages.SuccessMessages);

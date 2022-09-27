@@ -21,5 +21,8 @@ namespace Business.Constants
         public static string SuccessfulLogin = " Başarılı Giriş";
         public static string UserAlreadyExists = "Kullanıcı zaten var";
         public static string AccessTokenCreated = "Token Oluşturuldu";
+        public static string CarImageAdded = "Resim eklendi";
+        public static string CarImageUpdated = "Resim Güncellendi";
+        public static string CarImageDeleted = "Resim Silindi";
     }
 }
