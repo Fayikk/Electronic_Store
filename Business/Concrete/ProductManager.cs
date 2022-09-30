@@ -28,7 +28,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(ProductValidator))]//Burada AOP kullanarak gerekli ilerlemeleri sağlamaktayız.
                                                     //İnterception teknikleri kullanılacaktır.
-                                                    //[SecuredOperation("product.add")]
+        [SecuredOperation("product.add")]
         [CacheRemoveAspect("IProductService.Get")]
         public IResult Add(Product product)
         {
